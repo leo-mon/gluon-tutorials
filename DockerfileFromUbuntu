@@ -1,0 +1,41 @@
+FROM ubuntu:16.04 
+
+RUN groupadd mxnet && useradd -m -g mxnet mxnet
+RUN apt-get update && apt-get install -y\
+    build-essential\
+    git\
+    libopenblas-dev\
+    liblapack-dev\
+    libopencv-dev\
+    python3-dev\
+    python3-setuptools\
+    python3-numpy\
+    python3-pip\
+    graphviz  # 昔のチュートリアルでは確か使ったはず
+
+# MXNetインストール
+RUN git clone --recursive https://github.com/dmlc/mxnet
+WORKDIR mxnet
+RUN make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas
+WORKDIR /mxnet/python
+RUN pip3 install --upgrade pip
+RUN pip3 install -e .
+
+RUN pip3 install \
+    jupyter \
+    matplotlib \
+    graphviz
+    # Python3環境で学習予定
+
+RUN mkdir /home/mxnet/mxnet-tutorials
+RUN chown -R mxnet:mxnet /home/mxnet
+WORKDIR /home/mxnet/mxnet-tutorials
+
+EXPOSE 8888
+USER mxnet
+
+CMD ["/usr/local/bin/jupyter", "notebook",\
+    "--notebook-dir=/home/mxnet/mxnet-tutorials",\ 
+    "--ip='*'",\
+    "--port=8888",\ 
+    "--no-browser"]
