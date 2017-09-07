@@ -1,5 +1,5 @@
-# mxnet-tutorials
-Learning [MXNet-Tutorials]( http://mxnet.io/tutorials/index.html)  # Comments on Japanese
+# gluon-tutorials
+Learning [Gluon]( http://thestraightdope.mxnet.io/)  # Comments on Japanese
 
 MXNetのチュートリアル
 
