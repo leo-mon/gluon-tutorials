@@ -1,7 +1,7 @@
 # gluon-tutorials
 Learning [Gluon]( http://thestraightdope.mxnet.io/)  # Comments on Japanese
 
-MXNetのチュートリアル
+Gluonのチュートリアル
 
 ## 環境構築手順
 ### Docker(ソースコードビルド)
